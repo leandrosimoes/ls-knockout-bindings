@@ -52,4 +52,18 @@
             element.addEventListener('keypress', event => !!(event.key || '').match(validationRegex))
         }
     };
+
+    let _delayChangeInputCallback_timeout;
+    ko.bindingHandlers.delayChangeInputCallback = {
+        init: (element, valueAccessor) => {
+            const { delay = 1000, callback } = valueAccessor();
+
+            element.addEventListener('keyup', event => {
+                clearTimeout(_delayChangeInputCallback_timeout)
+                _delayChangeInputCallback_timeout = setTimeout(() => {
+                    !!callback && callback(event.target.value || '')
+                }, delay);
+            })
+        }
+    }
 })()

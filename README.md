@@ -54,3 +54,19 @@ cosnt viewModel = {
 
 ----------
 
+`delayChangeInputCallback` - Setup a callback with delay on input value change
+
+```javascript
+cosnt viewModel = {
+    delayChangeInputCallbackOptions: {
+        delay: 1000, // miliseconds
+        callback: value => { // do whatever you want with the value }
+    }
+}
+```
+
+```html
+<input type="text" data-bind="delayChangeInputCallback: delayChangeInputCallbackOptions">
+```
+
+----------
