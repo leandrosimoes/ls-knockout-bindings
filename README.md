@@ -6,7 +6,7 @@ Some simple but useful [Knockoutjs](https://knockoutjs.com) binding handlers
 `onpresskey` - Execute some action on press a key of your choice
 
 ```javascript
-cosnt viewModel = {
+const viewModel = {
     onPressKeyOptions: {
         key: 'ENTER',
         action: (value, event) => {
@@ -34,7 +34,7 @@ cosnt viewModel = {
 `hidden` - Knockoutjs has a `visible` binding. This is just a better way to negate that.
 
 ```javascript
-cosnt viewModel = {
+const viewModel = {
     HasToHideThis: ko.observable(true)
 }
 ```
@@ -57,7 +57,7 @@ cosnt viewModel = {
 `delayChangeInputCallback` - Setup a callback with delay on input value change
 
 ```javascript
-cosnt viewModel = {
+const viewModel = {
     delayChangeInputCallbackOptions: {
         delay: 1000, // miliseconds
         callback: value => { // do whatever you want with the value }
@@ -67,6 +67,32 @@ cosnt viewModel = {
 
 ```html
 <input type="text" data-bind="delayChangeInputCallback: delayChangeInputCallbackOptions">
+```
+
+----------
+
+`forIn` - Iterate over object keys
+
+```javascript
+const viewModel = {
+    myObject: {
+        Key1: "Value1",
+        Key2: "Value2"
+    }
+}
+```
+
+```html
+<!-- 
+    The output will be:
+    <div>
+        <b>Key1</b> <span>Value1</span>
+        <b>Key2</b> <span>Value2</span>
+    </div>
+-->
+<div data-bind="forIn: myObject">
+    <b data-bind="text: key"></b> <span data-bind="text: value"></span>
+</div>
 ```
 
 ----------
