@@ -84,4 +84,30 @@
           return { controlsDescendantBindings: true };
         }
     };
+
+	let _onClickCountTimeout;
+	ko.bindingHandlers.dispatchClickAfterCount = {
+		init: (element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) => {
+			let { count = 10, clearDelay = 1000, callback } = valueAccessor()
+
+			if (typeof callback !== 'function') throw new Error('Callback must be a function');
+
+			let clickedCounter = 0;
+			function countClick() {
+				clearTimeout(_onClickCountTimeout)
+				_onClickCountTimeout = setTimeout(() => {
+					clearTimeout(_onClickCountTimeout)
+					clickedCounter = 0
+				}, clearDelay)
+
+				if (clickedCounter >= count) {
+					callback();
+				}
+
+				clickedCounter++
+			}
+
+			ko.applyBindingsToNode(element, { click: countClick }, bindingContext);
+		}
+	}
 })()

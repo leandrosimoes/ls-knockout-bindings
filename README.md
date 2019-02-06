@@ -96,3 +96,23 @@ const viewModel = {
 ```
 
 ----------
+
+`dispatchClickAfterCount` - Dispatch a event after click in element the amount of times of your choice
+
+```javascript
+const viewModel = {
+    dispatchClickAfterCountOptions: {
+        count: 15, // will trigger callback after click 15 times
+        clearDelay: 1000, // will clear the counter after 1 second
+        callback: () => { // do whatever you want }
+    }
+}
+```
+
+```html
+<div data-bind="dispatchClickAfterCount: dispatchClickAfterCountOptions">
+    ...
+</div>
+```
+
+----------
